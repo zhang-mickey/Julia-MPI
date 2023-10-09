@@ -16,7 +16,8 @@ more processing units gives overall more registers per subtask,memory hit patter
 a random process that searches space for a result is now divided into 1024 searchers covering more space at once so finding the solution faster is more probable. 
 如果用顺序算法只有一个处理器，很可能大部分数据都存在main memory里面了，而如果用很多个处理器，我们可以将所有的数据直接存在 cashe里面！基本就不需要花时间读取了。
 ### Amdahl's law
-<img width="387" alt="image" src="https://github.com/zhang-mickey/Julia-MPI/assets/145342600/5b007b7d-efc4-41b0-8f63-6dbde681e102">
+<img width="442" alt="image" src="https://github.com/zhang-mickey/Julia-MPI/assets/145342600/05657f3f-0585-4294-bc13-b47d326e2608">
+
 
 
 ### Efficiency
@@ -39,4 +40,4 @@ Processors communicate by sending messages over a network
 ##  Parallel Algorithm
 ### Barnes-Hut
 ### ASP
-<img width="468" alt="image" src="https://github.com/zhang-mickey/Julia-MPI/assets/145342600/63f47656-f0cb-4e02-8a21-cb5badc079bf">
+
