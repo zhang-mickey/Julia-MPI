@@ -1,3 +1,8 @@
+## 
+https://docs.julialang.org/en/v1/manual/performance-tips/
+##
+https://juliaparallel.org/MPI.jl/stable/
+##
 You will perform experiments on DAS-5. 
 
 Assignment will be graded taking into consideration your
