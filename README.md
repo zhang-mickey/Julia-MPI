@@ -7,7 +7,7 @@
 Speedup =(Time on 1 CPU)/(Time on p CPUs)
 ```
 can speedup be super linear?(yes) (theoretically speedup can never exceed the number of processing elements p)
-
+Because the parallel version may perform less work than a sequential algorithm.
 Two examples
 (1)Negative search overhead
 more processing units gives overall more registers per subtask,memory hit patterns, simply better.
@@ -40,4 +40,29 @@ Processors communicate by sending messages over a network
 ##  Parallel Algorithm
 ### Barnes-Hut
 ### ASP
+### IDA*
+#### Approaches
+##### TDS(Transposition Driven Scheduling)
+efficiently handles so-called transposition tables on distributed-memory systems.
+use  asynchronous communication and message aggregation
+obtain far better performance than partition and replicate the tables
+</br>
+The problem of efficiently sharing transposition tables in distributed search.
+why asynchronous communication works well than replication and partitioning to distribute these tables
+### parallelizing the traininf process
+wxplain the difference and optimizations to scale up DL
+#### Data parallelism
+Training data is split over the compute nodes
+All compute nodes have identical copy of the DL model
+Advantage:
+Scales well for compute-intensive operations
+</br>
+disadvandage: 
 
+</br>
+Synchronization bottleneck, need large batches
+</br>
+Model must fit in memory on each node-data parallelism fails if the model is too big for 1 node
+#### Model parallelism
+Each node has different part of the DL model(split the model [Reinforcement Learning +Reduced memory footprint])-Output signal is propagated to node with next layer
+disadvandage:Heavy communication; little parallelism(stalling)
