@@ -1,4 +1,36 @@
 # Julia-MPI
+## semantic
+### addprocs()
+creating processes locally.
+</br>
+each process runs in a separated Julia instance. This means that each process has its own memory space and therefore they do not share memory. This results in distributed-memory parallelism.
+</br>
+If more than one process is available, the first process is called the main or master and the other the workers. 
+### @everywhere
+evaluates the given code on all processes
+### remotecall
+execute a given function on a remote processor 
+</br>
+remotecall does not return the result of the underlying function, but a Future.
+### fetch
+using fetch to get the result of future.
+<img width="680" alt="image" src="https://github.com/zhang-mickey/Julia-MPI/assets/145342600/f2d0b5dc-a4b9-4c4a-8978-47c07e90db72">
+</br>
+### @spawnat
+the two following cells are equivalent.
+```
+@spawnat proc ones(2,3)
+```
+```
+fun = () -> ones(2,3)
+remotecall(fun,proc)
+```
+### @async vs @spawnat
+@async generates a task that runs asynchronously in the current process, whereas @spawnat executes a task in a remote process in parallel. In both cases, the result is obtained using fetch.
+
+### Data movement
+When usig remotecall we send to the remote process a function and its arguments.
+### questions
 ```
 using Distributed
 addprocs(4)
@@ -7,6 +39,7 @@ b=0
 f=(i)->mod(i,a)==b
 n=10000
 c=rand(1:10,n)
+## implicit data movement
 x=@fetchfrom 3 count(f,c)
 ```
 (1)how many integers are sent and received between process 1 and process3 in the last line?
