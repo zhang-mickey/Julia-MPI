@@ -9,15 +9,16 @@ n=10000
 c=rand(1:10,n)
 x=@fetchfrom 3 count(f,c)
 ```
-how many integers are sent and received between process 1 and process3 in the last line?
+(1)how many integers are sent and received between process 1 and process3 in the last line?
 </br>
 We sent function 'f',which capture 2 integers('a' and 'b') and also the vector'c'.We get back the result(1 integer).Thus 10003.
 </br>
-which is the type of 'x' An 'Int'or a 'Future'?
+(2)which is the type of 'x' An 'Int'or a 'Future'?
 </br>
 'x' is an'Int' since '@fetchfrom' return the result of the code executed remotelly and not a 'Future' object. This is in contract to *'@spawnat' that returns immediatelly and returns a 'Future' object*.
 
 </br>  
+
 ```
 using Distributed
 addprocs(4)
@@ -30,6 +31,7 @@ a=[0]
 end
 x=a[1]
 ```
+
 </br>
 Which is the value of'x'?
 </br>
