@@ -1,4 +1,39 @@
 # Julia-MPI
+```
+using Distributed
+addprocs(4)
+a=2
+b=0
+f=(i)->mod(i,a)==b
+n=10000
+c=rand(1:10,n)
+x=@fetchfrom 3 count(f,c)
+```
+how many integers are sent and received between process 1 and process3 in the last line?
+</br>
+We sent function 'f',which capture 2 integers('a' and 'b') and also the vector'c'.We get back the result(1 integer).Thus 10003.
+</br>
+which is the type of 'x' An 'Int'or a 'Future'?
+</br>
+'x' is an'Int' since '@fetchfrom' return the result of the code executed remotelly and not a 'Future' object. This is in contract to *'@spawnat' that returns immediatelly and returns a 'Future' object*.
+
+</br>  
+```
+using Distributed
+addprocs(4)
+f=()->Channel{Int}(1)
+chnl=RemoteChannel(f)
+a=[0]
+@sync for w in workers()
+  @spawnat w put!(chnl,10)
+  a[1]=a[1]+take!(chnl)
+end
+x=a[1]
+```
+</br>
+Which is the value of'x'?
+</br>
+The value of'x' will be 40.Since we have 4 processes and each puts number 10 into the channel. The main process will take value 10 for 4 different times and add them resulting in value 40.
 
 ## 
 
